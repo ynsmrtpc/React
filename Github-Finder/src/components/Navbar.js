@@ -5,8 +5,13 @@ export class Navbar extends Component {
   render() {
     return (
       <nav className='navbar navbar-dark bg-purple'>
-        <a href="/" className='navbar-brand'>
-           <img width={'48px'} src="https://github.githubassets.com/images/modules/logos_page/Octocat.png"/>
+        <div className="d-block m-0 p-0'">
+          <small className='m-0 p-0 text-light'>Github</small> 
+          <small className='d-block m-0 p-0 text-light'>Finder</small>
+        </div>
+
+        <a href="/" className='d-flex justify-content-center align-items-center m-auto'>
+           <img  width={'64px'} src="https://github.githubassets.com/images/modules/logos_page/Octocat.png"/>
         </a>
       </nav> 
     )
