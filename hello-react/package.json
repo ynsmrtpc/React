@@ -1,0 +1,22 @@
+{
+  "name": "hello-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "babel": "npx babel src/app.js -o public/scripts/app.js --watch",
+    "start": "live-server public"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.18.6",
+    "@babel/core": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-react": "^7.18.6"
+  },
+  "dependencies": {
+    "yarn": "^1.22.19"
+  }
+}

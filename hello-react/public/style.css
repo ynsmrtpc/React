@@ -1,0 +1,78 @@
+* {
+    list-style: none;
+    box-sizing: border-box;
+}
+
+body {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    color: #663399;
+}
+
+.description {
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    padding-bottom: 1rem;
+}
+
+ul li {
+    padding: .3rem;
+}
+
+.delete {
+    margin-right: 1rem;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    font:bold;
+    color: #000000 !important;
+    cursor: pointer;
+}
+
+.delete:hover {
+    border: .1px solid blueviolet;
+    border-radius: .4rem;
+    background-color: rgba(255, 127, 153, 0.3);
+
+}
+button, input {
+    padding: .3rem;
+    margin: .4rem;
+    background-color: transparent;
+    border: .3px double #343434;
+    border-radius: .3rem;
+    background-color: rgba(93, 226, 126,.4);
+    color: #1d1a1a9e;
+}
+
+input {
+    background-color: transparent;
+    color: #343434;
+}
+
+input:focus {
+    border-color: rgba(126, 239, 104, 0.8);
+    outline: 0 none;
+}
+
+.clear {
+    background-color: rgba(244,43,32,.3);
+    cursor: pointer;
+}
+
+label {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 0, 0, 0.363);
+    padding: .6rem;
+    border-radius: .3rem;
+    color: #fafafa;
+    text-shadow: 3px 5px rgba(242, 45, 32,.5px);
+}
