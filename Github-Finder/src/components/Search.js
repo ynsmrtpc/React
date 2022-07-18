@@ -18,24 +18,23 @@ export class Search extends Component {
 
     onSubmit(e) {
         e.preventDefault()
-        this.props.searchUsers(this.state.keyword)
-        this.setState({
-            keyword: ''
-        })
+        if(this.state.keyword === ''){
+            this.props.setAlert('Please enter a value!','danger')
+        } else {
+            this.props.searchUsers(this.state.keyword)
+            this.setState({
+                keyword: ''
+            })
+        }
     }
 
   render() {
     return (
         <div className="containeer my-0 mt-3">
         <form className="input-group" onSubmit={this.onSubmit}>
-            <div className="container my-3 mx-5">
-                <div className="input-group">
-                    <input type="text" value={this.state.keyword} onChange={this.onChange} className='form-control'
-                    style=
-                    {{
-                        borderColor: '#8a2ce280',
-                        outline: 'outline: 0 none'
-                    }}/>
+            <div className="container my-3">
+                <div className="input-group col-md-4 d-flex mx-auto">
+                    <input type="text" value={this.state.keyword} onChange={this.onChange} className='form-control'/>
                     <div className="input-group-append">
                         <button type='submit' className='btn-purple btn'>Search</button>
                     </div>

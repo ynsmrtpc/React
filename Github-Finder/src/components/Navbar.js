@@ -1,32 +1,26 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 
-export class Navbar extends Component {
+class Navbar extends Component {
   render() {
     return (
-      <nav className='navbar navbar-dark bg-purple'>
-        <div className="d-block m-0 p-0'">
-          <small className='m-0 p-0 text-light'>Github</small> 
-          <small className='d-block m-0 p-0 text-light'>Finder</small>
+      <nav className='navbar navbar-expand-sm navbar-dark bg-purple'>
+          <Link to="/" className='navbar-brand'>
+            <img  width={'64px'} src="https://github.githubassets.com/images/modules/logos_page/Octocat.png"/>
+          </Link>
+          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span><i style={{fontSize:'23px'}} className="fa fa-bars"></i></span>
+          </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <Link to="about" className='nav-link'>About</Link>
+            </li>
+          </ul>
         </div>
-
-        <a href="/" className='d-flex justify-content-center align-items-center m-auto'>
-           <img  width={'64px'} src="https://github.githubassets.com/images/modules/logos_page/Octocat.png"/>
-        </a>
       </nav> 
     )
   }
 }
-
-// Default Parametre tanımlamak için kullanılır
-// Navbar.defaultProps = {
-//     icon: "fab fa-github",
-//     title: 'Github Finder'
-// }
-
-// Kullanımın zorunlu olduğunu belirtmek için kullanılır
-// Navbar.propTypes = {
-//     title: PropTypes.string.isRequired
-// }
 
 export default Navbar

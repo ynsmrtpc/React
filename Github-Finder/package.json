@@ -30,6 +30,7 @@
     "bootstrap": "4.5.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-router-dom": "5.2.0",
     "yarn": "^1.22.19"
   }
 }

@@ -24,6 +24,11 @@ $bg-purple: rgba(138, 44, 226, 0.502);
     color:#fafafa;
 }
 
+.form-control {
+    border-color: #8a2ce280;
+    outline: 0 none;
+}
+
 .form-control:focus,
 .btn-purple:focus,
 .btn-outline-purple:focus{
@@ -40,4 +45,16 @@ $bg-purple: rgba(138, 44, 226, 0.502);
 small {
     cursor: default;
     user-select: none;
+}
+
+.close:focus,
+.navbar-toggler:focus {
+    border: none;
+    border-color: transparent;
+    outline: 0 none;
+}
+
+.active {
+    font-weight: bold;
+    color:red;
 }
