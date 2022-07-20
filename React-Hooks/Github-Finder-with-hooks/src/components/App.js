@@ -1,5 +1,5 @@
-import React, { Component,Fragment } from 'react'
-import { BrowserRouter, Route, Switch, Link, NavLink } from "react-router-dom";
+import React, { useState } from 'react'
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Navbar from './Navbar'
 import Users from './Users'
 import About from './About'
@@ -8,94 +8,74 @@ import Search from './Search'
 import axios from 'axios'
 import UserDetails from './UserDetails';
 
-export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.searchUsers = this.searchUsers.bind(this);
-    this.clearUsers = this.clearUsers.bind(this);
-    this.setAlert = this.setAlert.bind(this);
-    this.getUser = this.getUser.bind(this);
-    this.getUserRepos = this.getUserRepos.bind(this);
-    this.state = {
-      loading: false,
-      users: [],
-      user: {},
-      repos: [],
-      alert: null
-    }
-  }
+const App = ( { showClearBtn } ) => {
+    const [loading, setLoading, users, setUsers, user, setUser, repos, setRepos, alert, setAlert] = useState(false,[],[],{},[],null)
   
-  searchUsers(keyword) {
-    this.setState({loading:true})
+  const searchUsers = (keyword) => {
+    setLoading(true)
     axios
       .get(`https://api.github.com/search/users?q=${keyword}`)
-      .then(res => this.setState({users: res.data.items, loading:false}))
+      .then(res => { setUsers(res.data.items); setLoading(false) })        
   }
 
-  getUser(username){
-    this.setState ({loading:true})
+  const getUser = (username) => {
+    setLoading(true)
     axios
       .get(`https://api.github.com/users/${username}`)
-      .then(res => this.setState({user: res.data, loading:false}))
+      .then(res => { setUser(res.data); setLoading(false) })
+        
   }
 
-  getUserRepos(username){
-    this.setState ({loading:true})
+  const getUserRepos = (username) =>{
+    setLoading(true)
     axios
       .get(`https://api.github.com/users/${username}/repos`)
-      .then(res => this.setState({repos: res.data, loading:false}))
+      .then(res => { setRepos(res.data); setLoading(false) })
   }
 
-  clearUsers() {
-    this.setState({
-      users: []
-    })
+  const clearUsers = () =>{
+    setUsers([])
   }
 
-  setAlert(msg,type) {
-    this.setState({
-      alert: {msg,type}
-    })
+  const setAlertMsg = (msg,type) => {
+    setAlert(msg,type)
 
     setTimeout(() => {
-      this.setState({alert:null})
+      setAlert(null)
     }, 2500);
   }
 
-  render() {
     return (
       <BrowserRouter>
         <Navbar />
-        <Alert alert={this.state.alert}/>
+        <Alert alert={alert}/>
         <Switch>
-          <Route exact path="/" render={ props => (
+          <Route exact path="/" render={ (searchUsers,clearUsers,showClearBtn,setAlert) => (
               <>
               <Search 
-                searchUsers={this.searchUsers} 
-                clearUsers={this.clearUsers} 
-                showClearBtn={this.state.users.length>0? true:false}
-                setAlert={this.setAlert}/>
-              <Users users={this.state.users} loading={this.state.loading}/>
+                searchUsers={searchUsers} 
+                clearUsers={clearUsers} 
+                showClearBtn={users.length>0? true:false}
+                setAlert={setAlertMsg}/>
+              <Users users={users} loading={loading}/>
               </>
             )
           } />
 
           <Route path="/about" component={About}/>
           <Route path="/user/:login" 
-          render={props => (
+          render={() => (
             <UserDetails 
-              {...props} 
-              getUser= {this.getUser}
-              getUserRepos= {this.getUserRepos}
-              user={this.state.user} 
-              repos={this.state.repos}
-              loading={this.state.loading}
+              getUser= {getUser}
+              getUserRepos= {getUserRepos}
+              user={user} 
+              repos={repos}
+              loading={loading}
             />
           )}/>
         </Switch>
       </BrowserRouter>
     )
-  }
 }
 
 export default App
