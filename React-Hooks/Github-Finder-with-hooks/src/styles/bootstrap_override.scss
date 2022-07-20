@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Beginner:wght@500&display=swap');
+$bg-purple: rgba(138, 44, 226, 0.502);
+
+* {
+    font-family: 'Edu VIC WA NT Beginner', cursive;
+}
+
+.bg-purple {
+    background-color: $bg-purple;
+}
+
+.btn-purple {
+    background-color: $bg-purple !important;
+    color: #fafafa !important;
+}
+
+.btn-outline-purple {
+    border-color: $bg-purple;
+    outline: 0 none;
+}
+
+.btn-outline-purple:hover {
+    background-color: $bg-purple;
+    color:#fafafa;
+}
+
+.form-control {
+    border-color: #8a2ce280;
+    outline: 0 none;
+}
+
+.form-control:focus,
+.btn-purple:focus,
+.btn-outline-purple:focus{
+        border-color: $bg-purple;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(138, 44, 226, 0.502);
+        outline: 0 none;
+}
+
+.card-title {
+    font-family:'Edu VIC WA NT Beginner', cursive;
+    font-size: 22px;
+}
+
+small {
+    cursor: default;
+    user-select: none;
+}
+
+.close:focus,
+.navbar-toggler:focus {
+    border: none;
+    border-color: transparent;
+    outline: 0 none;
+}
+
+.active {
+    font-weight: bold;
+    color:red;
+}
