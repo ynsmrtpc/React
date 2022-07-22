@@ -1,15 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import Loading from './Loading'
 import Repos from './Repos';
 
-export class UserDetails extends Component {
-    componentDidMount() {
-        this.props.getUser(this.props.match.params.login);
-        this.props.getUserRepos(this.props.match.params.login);
-    }
-  render() {
+const UserDetails = ({ getUser, getUserRepos, match, loading, repos, user }) => {
+    useEffect(() => {
+        getUser(match.params.login);
+        getUserRepos(match.params.login);
+    }, [])
     const {loading,repos} = this.props
-    const {name,avatar_url,location,html_url,bio,blog,followers,following,public_repos} = this.props.user
+    const {name,avatar_url,location,html_url,bio,blog,followers,following,public_repos} = user
     if(loading) return <Loading />
     return (
       <div className='container my-3'>
@@ -61,6 +60,5 @@ export class UserDetails extends Component {
       </div>
     )
   }
-}
 
 export default UserDetails
