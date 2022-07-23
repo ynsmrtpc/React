@@ -1,64 +1,105 @@
-import React, { Component, useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Loading from './Loading'
-import Repos from './Repos';
+import Repos from './Repos'
+import GithubContext from '../context/githubContext'
 
-const UserDetails = ({ getUser, getUserRepos, match, loading, repos, user }) => {
-    useEffect(() => {
-        getUser(match.params.login);
-        getUserRepos(match.params.login);
-    }, [])
-    const {loading,repos} = this.props
-    const {name,avatar_url,location,html_url,bio,blog,followers,following,public_repos} = user
-    if(loading) return <Loading />
-    return (
-      <div className='container my-3'>
-        <div className="row">
-            <div className="col-md-3">
-                <div className="card">
-                    <img src={avatar_url} alt="profile-photo" className='card-img-top' />
-                    <div className="card-body">
-                        <p className="card-text">{ name }</p>
-                        <p><i className='fas fa-map-marker-alt'></i>
-                        {location}</p>
-                        <p>
-                            <a href={html_url} target="_blank" className='btn btn-outline-purple btn-sm'>Go Github</a>
-                        </p>
-                    </div>
-                </div>
+const UserDetails = ({ getUserRepos, match, repos }) => {
+  const { getUser, loading, user } = useContext(GithubContext)
+
+  useEffect(() => {
+    getUser(match.params.login)
+    getUserRepos(match.params.login)
+  }, [])
+
+  const {
+    name,
+    avatar_url,
+    location,
+    html_url,
+    bio,
+    blog,
+    followers,
+    following,
+    public_repos,
+  } = user
+
+  if (loading) return <Loading />
+
+  return (
+    <div className="container my-3">
+      <div className="row">
+        <div className="col-md-3">
+          <div className="card">
+            <img
+              src={avatar_url}
+              alt="profile-photo"
+              className="card-img-top"
+            />
+            <div className="card-body">
+              <p className="card-text">{name}</p>
+              <p>
+                <i className="fas fa-map-marker-alt"></i>
+                {location}
+              </p>
+              <p>
+                <a
+                  href={html_url}
+                  target="_blank"
+                  className="btn btn-outline-purple btn-sm"
+                >
+                  Go Github
+                </a>
+              </p>
             </div>
-            <div className="col-md-9">
-                <div className="card">
-                    <div className="card-body">
-                    <div className="mb-3" style={{fontSize:'20px'}}>
-                            <span className="badge badge-primary  p-2">Followers: {followers}</span>
-                            <span className="badge badge-danger ml-2
-                            p-2">Following: {following}</span>
-                            <span className="badge badge-success ml-2
-                            p-2">Repos: {public_repos}</span>
-                        </div>
-                        {
-                            bio &&
-                            <>
-                                <h3>About</h3>
-                                <p>{bio}</p>
-                            </>
-                        }
-                        {
-                            blog &&
-                            <>
-                                <h3>Website</h3>
-                                <a href={`https://${blog}`} target="_blank" className='btn btn-outline-purple btn-sm'>Go Website</a>
-                            </>
-                        }
-                    </div>
-                    <ul className="list-group list-group-flush">
-                        <Repos repos={repos} />
-                </ul>
-                </div>
+          </div>
+        </div>
+        <div className="col-md-9">
+          <div className="card">
+            <div className="card-body">
+              <div className="mb-3" style={{ fontSize: '20px' }}>
+                <span className="badge badge-primary  p-2">
+                  Followers: {followers}
+                </span>
+                <span
+                  className="badge badge-danger ml-2
+                        p-2"
+                >
+                  Following: {following}
+                </span>
+                <span
+                  className="badge badge-success ml-2
+                        p-2"
+                >
+                  Repos: {public_repos}
+                </span>
+              </div>
+              {bio && (
+                <>
+                  <h3>About</h3>
+                  <p>{bio}</p>
+                </>
+              )}
+              {blog && (
+                <>
+                  <h3>Website</h3>
+                  <a
+                    href={`https://${blog}`}
+                    target="_blank"
+                    className="btn btn-outline-purple btn-sm"
+                  >
+                    Go Website
+                  </a>
+                </>
+              )}
             </div>
+            <ul className="list-group list-group-flush">
+              <Repos repos={repos} />
+            </ul>
+          </div>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
+}
 
 export default UserDetails
